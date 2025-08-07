@@ -3,6 +3,7 @@ from PySide6.QtWidgets import (QHBoxLayout, QPushButton, QMessageBox,
                                QFileDialog, QSpacerItem, QSizePolicy, QWidget)
 from app.views.table_view import TableView
 import pandas as pd
+from app.analytics.visualizations import TransactionVisualizer, ClientSegmentVisualizer
 
 
 class ReportController:
@@ -139,3 +140,11 @@ class ReportController:
             "Функция печати находится в разработке",
             QMessageBox.Ok
         )
+
+    def get_transaction_chart(self):
+        stats = self._get_transaction_stats()
+        return TransactionVisualizer(stats)
+
+    def get_client_segment_chart(self):
+        segments = self._get_client_segments()
+        return ClientSegmentVisualizer(segments)
